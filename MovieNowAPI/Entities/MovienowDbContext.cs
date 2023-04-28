@@ -18,7 +18,6 @@ namespace MovieNowAPI.Entities
         }
 
         public virtual DbSet<Follower> Followers { get; set; }
-        public virtual DbSet<Link> Links { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<ProfilePrivacySetting> ProfilePrivacySettings { get; set; }
@@ -50,24 +49,6 @@ namespace MovieNowAPI.Entities
                     .HasConstraintName("followers_ibfk_1");
             });
 
-            modelBuilder.Entity<Link>(entity =>
-            {
-                entity.ToTable("links");
-
-                entity.HasIndex(e => e.MovieId, "movieId");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.ImdbId).HasColumnName("imdbId");
-
-                entity.Property(e => e.MovieId).HasColumnName("movieId");
-
-                entity.HasOne(d => d.Movie)
-                    .WithMany(p => p.Links)
-                    .HasForeignKey(d => d.MovieId)
-                    .HasConstraintName("links_ibfk_1");
-            });
-
             modelBuilder.Entity<Movie>(entity =>
             {
                 entity.ToTable("movies");
@@ -79,10 +60,20 @@ namespace MovieNowAPI.Entities
                     .HasMaxLength(1000)
                     .HasColumnName("genre");
 
+                entity.Property(e => e.Poster)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .HasColumnName("poster");
+
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(1000)
                     .HasColumnName("title");
+
+                entity.Property(e => e.Year)
+                    .IsRequired()
+                    .HasMaxLength(5)
+                    .HasColumnName("year");
             });
 
             modelBuilder.Entity<Profile>(entity =>
@@ -147,7 +138,7 @@ namespace MovieNowAPI.Entities
 
                 entity.Property(e => e.MovieId).HasColumnName("movieId");
 
-                entity.Property(e => e.RatingNumber).HasColumnName("rating");
+                entity.Property(e => e.RatingNumber).HasColumnName("ratingNumber");
 
                 entity.Property(e => e.UserId).HasColumnName("userId");
 
@@ -177,7 +168,7 @@ namespace MovieNowAPI.Entities
                 entity.Property(e => e.ReviewText)
                     .IsRequired()
                     .HasMaxLength(255)
-                    .HasColumnName("review");
+                    .HasColumnName("reviewText");
 
                 entity.Property(e => e.UserId).HasColumnName("userId");
 
