@@ -33,6 +33,12 @@ namespace MovieNowAPI.Controllers
         {
             return await movieRepository.FilterMovies(title, genre, year);
         }
+
+        [HttpGet("recent")]
+        public async Task<ActionResult<List<Movie>>> GetRecentMovies()
+        {
+            return await movieRepository.GetRecentMovies();
+        }
     }
 }
 

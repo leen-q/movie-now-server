@@ -56,6 +56,11 @@ namespace MovieNowAPI.Repository
             return await context.Movies.ToListAsync();
         }
 
+        public async Task<List<Movie>> GetRecentMovies()
+        {
+            return await context.Movies.OrderByDescending(x => x.Year).ThenByDescending(x => x.Id).Take(8).ToListAsync();
+        }
+
         public async Task<Movie> GetMovieById(int id)
         {
             return await context.Movies.FindAsync(id);

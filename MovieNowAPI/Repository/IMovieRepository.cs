@@ -7,6 +7,7 @@ namespace MovieNowAPI.Repository
         Task<List<Movie>> GetAllMovies();
         Task<Movie> GetMovieById(int id);
         Task<List<Movie>> FilterMovies(string title, string genre, string year);
+        Task<List<Movie>> GetRecentMovies();
 
         Task Save();
     }

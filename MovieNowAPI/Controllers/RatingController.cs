@@ -31,16 +31,16 @@ namespace MovieNowAPI.Controllers
             return await ratingRepository.GetRatingById(id);
         }
 
-        [HttpGet("{movieId}")]
-        public async Task<ActionResult<List<Rating>>> GetRatingsByMovie(int movieId)
+        [HttpGet("movieId/{id}")]
+        public async Task<ActionResult<List<Rating>>> GetRatingsByMovie(int id)
         {
-            return await ratingRepository.GetRatingsByMovie(movieId);
+            return await ratingRepository.GetRatingsByMovie(id);
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<List<Rating>>> GetRatingsByUser(int userId)
+        [HttpGet("userId/{id}")]
+        public async Task<ActionResult<List<Rating>>> GetRatingsByUser(int id)
         {
-            return await ratingRepository.GetRatingsByUser(userId);
+            return await ratingRepository.GetRatingsByUser(id);
         }
 
         [HttpPost]
