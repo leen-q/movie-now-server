@@ -10,7 +10,6 @@ builder.Services.AddEntityFrameworkMySQL().AddDbContext<MovienowDbContext>(optio
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

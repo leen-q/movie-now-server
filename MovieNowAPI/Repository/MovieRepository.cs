@@ -66,6 +66,19 @@ namespace MovieNowAPI.Repository
             return await context.Movies.FindAsync(id);
         }
 
+        public async Task<List<RatedMovie>> GetRatedMoviesByUser(int userId)
+        {
+            var ratedMovies = context.Ratings.Where(x => x.UserId == userId)
+                .Join(context.Movies, r => r.MovieId, m => m.Id, (r, m) => new RatedMovie
+            {
+                Id = m.Id,
+                Title = m.Title,
+                Rating = r.RatingNumber.Value,
+            }).ToListAsync();
+
+            return await ratedMovies;
+        }
+
         public async Task Save()
         {
             await context.SaveChangesAsync();

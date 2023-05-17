@@ -39,6 +39,12 @@ namespace MovieNowAPI.Controllers
         {
             return await movieRepository.GetRecentMovies();
         }
+
+        [HttpGet("rated/{userId}")]
+        public async Task<ActionResult<List<RatedMovie>>> GetRatedMoviesByUser(int userId)
+        {
+            return await movieRepository.GetRatedMoviesByUser(userId);
+        }
     }
 }
 
